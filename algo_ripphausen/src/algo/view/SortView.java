@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 
 import algo.sort.HeapSort;
 import algo.sort.InsertionSort;
-import algo.sort.MergeSortWiki;
+import algo.sort.MergeSort;
 import algo.sort.QuickSort;
 import algo.sort.SelectionSort;
 import algo.sort.Sort;
@@ -33,7 +33,7 @@ public class SortView extends JFrame {
 
 	private SelectionSort selectionsort = new SelectionSort();
 	private InsertionSort insertsort = new InsertionSort();
-	private MergeSortWiki mergesort = new MergeSortWiki();
+	private MergeSort mergesort = new MergeSort();
 	private HeapSort heapsort = new HeapSort();
 	private QuickSort quicksort = new QuickSort();
 	private Sort[] so = { selectionsort, insertsort, mergesort, heapsort, quicksort };
