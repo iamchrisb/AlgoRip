@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -14,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import algo.sort.HeapSort;
 import algo.sort.InsertionSort;
@@ -21,6 +25,7 @@ import algo.sort.MergeSort;
 import algo.sort.QuickSort;
 import algo.sort.SelectionSort;
 import algo.sort.Sort;
+import algo.util.FileIntArray;
 
 public class SortView extends JFrame {
 
@@ -28,89 +33,179 @@ public class SortView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer[] array = new Integer[20];
-	private Integer[] res_array = new Integer[20];
+	
+	//needed arrays
+	private Integer[] array_to_sort;
+	private Integer[] res_array;
 
+	//sort classes
 	private SelectionSort selectionsort = new SelectionSort();
 	private InsertionSort insertsort = new InsertionSort();
 	private MergeSort mergesort = new MergeSort();
 	private HeapSort heapsort = new HeapSort();
 	private QuickSort quicksort = new QuickSort();
-	private Sort[] so = { selectionsort, insertsort, mergesort, heapsort, quicksort };
+	private Sort[] so = { selectionsort, insertsort, mergesort, heapsort,
+			quicksort };
 
-	private JTextArea tres;
-	private JTextArea ta;
-	private JComboBox box;
+	//gui needed crap
+	private JTextArea sortedArrayTextArea;
+	private JTextArea chosenArrayTextArea;
+	private JComboBox sortBox;
+	private JLabel time;
+	private JComboBox fileArrayComboBox;
+	private JTextField randomArrayLengthTF;
+	
+//	private String s = System.getProperty()
+	private File ARRAY_RESSOURCE_PATH = new File(System.getProperty("user.dir") + "/res/");
 
 	public SortView() {
 
 		this.setLayout(new GridLayout(0, 2));
 
-		JPanel left = new JPanel();
-		left.setBounds(200, 200, this.getWidth() / 2, this.getHeight());
+		JPanel leftPA = new JPanel();
+		leftPA.setBounds(200, 200, this.getWidth() / 2, this.getHeight());
 
-		JPanel right = new JPanel();
-		right.setBounds(200 + this.getWidth() / 2, 200, this.getWidth() / 2,
+		JPanel rightPA = new JPanel();
+		rightPA.setBounds(200 + this.getWidth() / 2, 200, this.getWidth() / 2,
 				this.getHeight());
-		right.setBackground(Color.lightGray);
+		rightPA.setBackground(Color.lightGray);
 
-		this.add(left);
-		this.add(right);
+		this.add(leftPA);
+		this.add(rightPA);
 
-		left.setLayout(new BorderLayout());
-		right.setLayout(new BorderLayout());
+		leftPA.setLayout(new BorderLayout());
+		rightPA.setLayout(new BorderLayout());
 
-		//fill with Sort-Array
-		box = new JComboBox(so);
-		
+		// fill with Sort-Array
+		sortBox = new JComboBox(so);
+
 		JLabel l = new JLabel("choose to sort:");
 		JButton b = new JButton("sort!");
-		JButton val = new JButton("generate");
+		JButton generate = new JButton("generate");
+		randomArrayLengthTF = new JTextField();
 		JPanel northpa = new JPanel();
 
 		northpa.add(l);
-		northpa.add(box);
+		northpa.add(sortBox);
 		northpa.add(b);
 
-		left.add(northpa, BorderLayout.NORTH);
+		leftPA.add(northpa, BorderLayout.NORTH);
 
-		ta = new JTextArea(20, 20);
-		left.add(new JScrollPane(ta), BorderLayout.CENTER);
-		left.add(val, BorderLayout.SOUTH);
+		chosenArrayTextArea = new JTextArea(20, 20);
+		leftPA.add(new JScrollPane(chosenArrayTextArea), BorderLayout.CENTER);
+		GridLayout g = new GridLayout(0, 3);
+		JPanel leftSouthPA = new JPanel(g);
+		leftSouthPA.add(randomArrayLengthTF);
+		leftSouthPA.add(generate);
+		time = new JLabel("foobar");
+		leftSouthPA.add(time);
+		leftPA.add(leftSouthPA, BorderLayout.SOUTH);
 
 		JLabel res = new JLabel("Result: ");
-		tres = new JTextArea(20, 20);
+		sortedArrayTextArea = new JTextArea(20, 20);
 
-		right.add(res, BorderLayout.NORTH);
-		right.add(new JScrollPane(tres), BorderLayout.CENTER);
+		fileArrayComboBox = new JComboBox(ARRAY_RESSOURCE_PATH.listFiles());
+		fileArrayComboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				File current = ((File) fileArrayComboBox.getSelectedItem());
+				chosenArrayTextArea.setText("");
+				sortedArrayTextArea.setText("");
+				Integer[] p = FileIntArray.FileToIntegerArray(current.getAbsolutePath());
+				for(int i = 0; i < p.length; i++){
+					chosenArrayTextArea.setText(chosenArrayTextArea.getText() + p[i] + "\n");
+				}
+			}
+		});
+		
+		rightPA.add(res, BorderLayout.SOUTH);
+		rightPA.add(fileArrayComboBox, BorderLayout.NORTH);
+		rightPA.add(new JScrollPane(sortedArrayTextArea), BorderLayout.CENTER);
 
 		this.setVisible(true);
 		this.setBounds(0, 0, 800, 600);
 
-		val.addActionListener(new ActionListener() {
+		generate.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ta.setText("");
-				tres.setText("");
-				Random rand = new Random();
-				for (int i = 0; i < array.length; i++) {
-					int j = (rand.nextInt(100));
-					array[i] = j;
-					ta.setText(ta.getText() + j + "\n");
-				}
+				Thread tr2 = new Thread(runnableGenerate);
+				tr2.start();
 			}
 		});
 
 		b.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				tres.setText("");
-				res_array = ((Sort) box.getSelectedItem()).sort(array);
-				for (int i = 0; i < res_array.length; i++) {
-					tres.setText(tres.getText() + res_array[i] + "\n");
+				Thread tr1 = new Thread(runnableSort);
+				tr1.start();
+			}
+		});
+		
+		randomArrayLengthTF.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyChar() == 's'){
+					System.out.println("deine mama tippt s");
 				}
 			}
 		});
 	}
+	
+	Runnable r3 = new Runnable() {
+		@Override
+		public void run() {
+			chosenArrayTextArea.setText("");
+			sortedArrayTextArea.setText("");
+//			FileIntArray
+		};
+	};
+	
+	Runnable runnableGenerate = new Runnable() {
+		@Override
+		public void run() {
+			Integer length = new Integer(randomArrayLengthTF.getText());
+			array_to_sort = new Integer[length];
+			
+			chosenArrayTextArea.setText("");
+			sortedArrayTextArea.setText("");
+			Random rand = new Random();
+			for (int i = 0; i < array_to_sort.length; i++) {
+				int j = (rand.nextInt(length));
+				array_to_sort[i] = j;
+				chosenArrayTextArea.setText(chosenArrayTextArea.getText() + j + "\n");
+			}
+		}
+	};
+
+	Runnable runnableSort = new Runnable() {
+		@Override
+		public void run() {
+				sortedArrayTextArea.setText("");
+				res_array = new Integer[new Integer(randomArrayLengthTF.getText())];
+				
+				Long start = System.currentTimeMillis();
+				res_array = ((Sort) sortBox.getSelectedItem()).sort(array_to_sort);
+				start = System.currentTimeMillis() - start;
+				time.setText(start.toString());
+				System.out.println(start);
+				for (int i = 0; i < res_array.length; i++) {
+					sortedArrayTextArea.setText(sortedArrayTextArea.getText() + res_array[i] + "\n");
+				}
+		}
+	};
 }
