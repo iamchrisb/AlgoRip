@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -36,7 +37,7 @@ public class SortView extends JFrame {
 	
 	//needed arrays
 	private Integer[] array_to_sort;
-	private Integer[] res_array;
+	private Integer[] array_ressource;
 
 	//sort classes
 	private SelectionSort selectionsort = new SelectionSort();
@@ -55,11 +56,14 @@ public class SortView extends JFrame {
 	private JComboBox fileArrayComboBox;
 	private JTextField randomArrayLengthTF;
 	
+	private JFrame frame;
+	
 //	private String s = System.getProperty()
 	private File ARRAY_RESSOURCE_PATH = new File(System.getProperty("user.dir") + "/res/");
 
 	public SortView() {
 
+		frame = this;
 		this.setLayout(new GridLayout(0, 2));
 
 		JPanel leftPA = new JPanel();
@@ -109,13 +113,8 @@ public class SortView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				File current = ((File) fileArrayComboBox.getSelectedItem());
-				chosenArrayTextArea.setText("");
-				sortedArrayTextArea.setText("");
-				Integer[] p = FileIntArray.FileToIntegerArray(current.getAbsolutePath());
-				for(int i = 0; i < p.length; i++){
-					chosenArrayTextArea.setText(chosenArrayTextArea.getText() + p[i] + "\n");
-				}
+				Thread tr3 = new Thread(runnableChoseFromFile);
+				tr3.start();
 			}
 		});
 		
@@ -124,7 +123,7 @@ public class SortView extends JFrame {
 		rightPA.add(new JScrollPane(sortedArrayTextArea), BorderLayout.CENTER);
 
 		this.setVisible(true);
-		this.setBounds(0, 0, 800, 600);
+		this.setBounds(0, 0, 1000, 600);
 
 		generate.addActionListener(new ActionListener() {
 
@@ -159,19 +158,29 @@ public class SortView extends JFrame {
 			
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyChar() == 's'){
-					System.out.println("deine mama tippt s");
+				@SuppressWarnings("static-access")
+				String str = arg0.getKeyText(arg0.getKeyCode());
+				System.out.println(str);
+				if( str.matches("[0-9]|Rücktaste") ){
+				}else{
+					JOptionPane.showMessageDialog(frame, "ONLY NUMBERS!!");
+					randomArrayLengthTF.setText("");
 				}
 			}
 		});
 	}
 	
-	Runnable r3 = new Runnable() {
+	Runnable runnableChoseFromFile = new Runnable() {
 		@Override
 		public void run() {
+			File current = ((File) fileArrayComboBox.getSelectedItem());
 			chosenArrayTextArea.setText("");
 			sortedArrayTextArea.setText("");
-//			FileIntArray
+			Integer[] p = FileIntArray.FileToIntegerArray(current.getAbsolutePath());
+			array_to_sort = p;
+			for(int i = 0; i < p.length; i++){
+				chosenArrayTextArea.setText(chosenArrayTextArea.getText() + p[i] + "\n");
+			}
 		};
 	};
 	
@@ -196,15 +205,15 @@ public class SortView extends JFrame {
 		@Override
 		public void run() {
 				sortedArrayTextArea.setText("");
-				res_array = new Integer[new Integer(randomArrayLengthTF.getText())];
+//				res_array = new Integer[new Integer(randomArrayLengthTF.getText())];
 				
 				Long start = System.currentTimeMillis();
-				res_array = ((Sort) sortBox.getSelectedItem()).sort(array_to_sort);
+				array_ressource = ((Sort) sortBox.getSelectedItem()).sort(array_to_sort);
 				start = System.currentTimeMillis() - start;
 				time.setText(start.toString());
 				System.out.println(start);
-				for (int i = 0; i < res_array.length; i++) {
-					sortedArrayTextArea.setText(sortedArrayTextArea.getText() + res_array[i] + "\n");
+				for (int i = 0; i < array_ressource.length; i++) {
+					sortedArrayTextArea.setText(sortedArrayTextArea.getText() + array_ressource[i] + "\n");
 				}
 		}
 	};
