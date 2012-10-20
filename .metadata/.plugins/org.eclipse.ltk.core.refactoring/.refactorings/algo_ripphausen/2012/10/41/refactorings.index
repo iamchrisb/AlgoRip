@@ -1,0 +1,12 @@
+1349714228594	Rename method 'fillLast'
+1349716243346	Rename method 'leftAdd'
+1349716576578	Rename type 'MergeSort'
+1349717494336	Rename local variable 'ar'
+1349773325799	Rename local variable 'arl'
+1349774349672	Delete element
+1349774364935	Rename type 'MergeSortSU'
+1349853301543	Convert local variable 'secs' to field
+1349987819194	Convert local variable 'rightBox' to field
+1349991521435	Rename local variable 'val'
+1349991527339	Rename local variable 'generatel'
+1350152252158	Convert local variable 'n' to field

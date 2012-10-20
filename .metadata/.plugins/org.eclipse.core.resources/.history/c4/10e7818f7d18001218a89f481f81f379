@@ -1,0 +1,7 @@
+package algo.util;
+
+public class FileTestSave {
+	static public void addStringToFile(String dat){
+		
+	}
+}

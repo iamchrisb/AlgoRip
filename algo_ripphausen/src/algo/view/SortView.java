@@ -59,7 +59,8 @@ public class SortView extends JFrame {
 	private JFrame frame;
 	
 //	private String s = System.getProperty()
-	private File ARRAY_RESSOURCE_PATH = new File(System.getProperty("user.dir") + "/res/");
+	private File ARRAY_RESSOURCE_PATH = new File(System.getProperty("user.dir") + "/res/arrays/");
+	public static String TEST_RESSOURCE_PATH = new String(System.getProperty("user.dir") + "/res/test/keks.txt");
 
 	public SortView() {
 

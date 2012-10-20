@@ -37,78 +37,28 @@ public class HeapSort implements Sort {
 	 */
 	public <T extends Comparable<T>> void heapify(T[] ar, int i, int till) {
 
-		T value = ar[i];
-
 		int rF = 2 * (i + 1);
 		int lF = 2 * (i + 1) - 1;
-		
-/*
-		boolean left1 = lF < ar.length;
-		boolean left2 = lF > 0;
-		
-		boolean leftGroup = left1 && left2;
 
-		boolean right1 = rF < ar.length;
-		boolean right2 = rF > 0;
-
-		boolean rightGroup = right1 && right2;
-*/
 		int largest = i;
-		
-		if( lF < till) {
-			if(lF == till && ar[lF].compareTo(ar[i]) < 0){
-				largest = lF;
-			}
-			if(ar[lF].compareTo(ar[i]) < 0) {
-				largest = lF;
-			}
-			if(rF <= till){
-				if(ar[lF].compareTo(ar[rF]) < 0) largest = rF;
-			}
-			largest = lF;
-			heapify(ar, i, till);
-		}
-		
-//		boolean toN  = lF > n && rF > n;
 
-		
-		/*
-		if ((rightGroup && leftGroup )) {
-			if (ar[rF].compareTo(ar[lF]) < 0) {
+		if (lF < till) {
+			if (lF == till) {
 				largest = lF;
-				if (ar[largest].compareTo(ar[i]) > 0 ) {
-					T swap = ar[i];
-					ar[i] = ar[largest];
-					ar[largest] = swap;
-					heapify(ar, largest);
-				}
-			} else {
+			} else if (ar[lF].compareTo(ar[rF]) < 0) {
 				largest = rF;
-				if (ar[largest].compareTo(ar[i]) > 0 ) {
-					T swap = ar[i];
-					ar[i] = ar[largest];
-					ar[largest] = swap;
-					heapify(ar, largest);
-				}
+			} else {
+				largest = lF;
 			}
-		} else if (rightGroup) {
-			largest = rF;
-			if (ar[largest].compareTo(ar[i]) > 0 ) {
+			if (ar[largest].compareTo(ar[i]) > 0) {
 				T swap = ar[i];
 				ar[i] = ar[largest];
 				ar[largest] = swap;
-				heapify(ar, largest);
+				heapify(ar, largest, till);
 			}
-		} else if (leftGroup) {
-			largest = lF;
-			if (ar[largest].compareTo(ar[i]) > 0 ) {
-				T swap = ar[i];
-				ar[i] = ar[largest];
-				ar[largest] = swap;
-				heapify(ar, largest);
-			}
+
 		}
-		*/
+
 	}
 
 	public <T extends Comparable<T>> void buildHeap(T[] ar) {

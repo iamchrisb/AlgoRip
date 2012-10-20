@@ -1,0 +1,35 @@
+package algo.util;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
+public class FileTestSave {
+	static public void addStringToFile(String dat) {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(dat);
+		} catch (Exception e) {
+			System.out
+					.println("Datei konnte nicht geöffnet werden oder existiert nicht");
+		}
+
+		try {
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+
+			String row;
+			int length = new Integer(br.readLine());
+			
+			for(int i = 0; i < length ; i++ ) {
+				row = br.readLine();
+				if(row == null) break;
+			}
+
+		} catch (Exception e) {
+			System.out.println();
+		} finally {
+			
+		}
+	}
+}

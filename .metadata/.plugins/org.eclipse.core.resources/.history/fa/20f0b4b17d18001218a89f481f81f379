@@ -1,0 +1,9 @@
+package algo.util;
+
+import java.io.FileInputStream;
+
+public class FileTestSave {
+	static public void addStringToFile(String dat){
+		FileInputStream fis = null;
+	}
+}

@@ -1,0 +1,18 @@
+package algo.util;
+
+import java.io.File;
+
+public class Test {
+
+	private int i;
+	private int b;
+	private String t;
+	private String o;
+	private File f;
+	
+	public static void main(String[] args) {
+		System.out.println(Math.sqrt(25));
+	}
+	
+	
+}

@@ -1,0 +1,14 @@
+package algo.util;
+
+import java.io.FileInputStream;
+
+public class FileTestSave {
+	static public void addStringToFile(String dat){
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(dat);
+		} catch (Exception e) {
+			System.out.println("Datei konnte nicht geöffnet werden oder existiert nicht");
+		}
+	}
+}
