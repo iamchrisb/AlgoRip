@@ -9,20 +9,13 @@ import java.io.InputStreamReader;
 
 public class FileTestSave {
 	static public void addStringToFile(String dat, String string) {
-		FileWriter fw = null;
+
 		try {
-			fw = new FileWriter(new File(dat),true);
-			fw.write(string + "\n");
+			@SuppressWarnings("resource")
+			FileWriter fw = new FileWriter(new File(dat));
+			fw.write(string);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			if(fw != null)
-				try {
-					fw.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 		}
 	}
 
