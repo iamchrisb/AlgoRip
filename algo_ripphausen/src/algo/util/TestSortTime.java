@@ -3,16 +3,19 @@ package algo.util;
 public class TestSortTime {
 
 	private String date;
-	private int time;
+	private long time;
 	private String arrayname;
 	private String sort;
+	private int array_length;
 	
-	public TestSortTime(String date, int time, String arrayname, String sort) {
+	public TestSortTime(String date, long time, String arrayname, String sort) {
 		this.date = date;
 		this.time = time;
 		this.arrayname = arrayname;
 		this.sort = sort;
 	}
+	
+	public TestSortTime() {}
 	
 	public String getSort() {
 		return sort;
@@ -28,11 +31,11 @@ public class TestSortTime {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
-	public void setTime(int time) {
-		this.time = time;
+	public void setTime(Long start) {
+		this.time = start;
 	}
 	public String getArrayname() {
 		return arrayname;
@@ -41,9 +44,16 @@ public class TestSortTime {
 		this.arrayname = arrayname;
 	}
 	
+	public int getArray_length() {
+		return array_length;
+	}
+
+	public void setArray_length(int array_length) {
+		this.array_length = array_length;
+	}
+
 	@Override
 	public String toString() {
-		return "method: " + sort + " - Time: " + time + " - Array: " + arrayname + " - Date: " + date;
+		return "method: " + sort + " - time: " + time + " - Array: " + arrayname + " - Length: " + array_length + " - Date: " + date;
 	}
-	
 }

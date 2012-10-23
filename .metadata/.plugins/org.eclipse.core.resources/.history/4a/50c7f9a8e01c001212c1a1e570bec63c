@@ -1,0 +1,6 @@
+method: HeapSort - Time: 1 - Array: Generated - Length: 200 - Date: null
+method: InsertionSort - Time: 2 - Array: Generated - Length: 200 - Date: null
+method: MergeSort - Time: 2 - Array: Generated - Length: 300 - Date: null
+method: SelectionSort	 - time: 7	 - Array: Generated	 - Length: 300	 - Date: null
+method: HeapSort	 - time: 2	 - Array: Generated	 - Length: 300	 - Date: null
+method: HeapSort - time: 2 - Array: Generated - Length: 200 - Date: null
