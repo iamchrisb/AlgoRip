@@ -1,9 +1,0 @@
-1349114748153	Rename method 'computeFibo'
-1349126289931	Rename type 'SelectionSort'
-1349248250167	Rename local variable 'left'
-1349248256542	Rename local variable 'content'
-1349250397492	Convert local variable 'tres' to field
-1349250411304	Convert local variable 'ta' to field
-1349251523307	Rename type 'SlectionSort'
-1349255450846	Convert local variable 'box' to field
-1349646772057	Rename local variable 'l'
