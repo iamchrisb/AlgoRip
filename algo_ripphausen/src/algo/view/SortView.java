@@ -5,9 +5,10 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.Date;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -27,6 +28,8 @@ import algo.sort.QuickSort;
 import algo.sort.SelectionSort;
 import algo.sort.Sort;
 import algo.util.FileIntArray;
+import algo.util.FileTestSave;
+import algo.util.TestSortTime;
 
 public class SortView extends JFrame {
 
@@ -58,9 +61,9 @@ public class SortView extends JFrame {
 	
 	private JFrame frame;
 	
-//	private String s = System.getProperty()
 	private File ARRAY_RESSOURCE_PATH = new File(System.getProperty("user.dir") + "/res/arrays/");
-	public static String TEST_RESSOURCE_PATH = new String(System.getProperty("user.dir") + "/res/test/keks.txt");
+	public static String TEST_RESSOURCE_PATH = new String(System.getProperty("user.dir") + "/res/test/tests.txt");
+	private TestSortTime testSortTime = new TestSortTime();
 
 	public SortView() {
 
@@ -143,20 +146,7 @@ public class SortView extends JFrame {
 			}
 		});
 		
-		randomArrayLengthTF.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		randomArrayLengthTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				@SuppressWarnings("static-access")
@@ -190,7 +180,7 @@ public class SortView extends JFrame {
 		public void run() {
 			Integer length = new Integer(randomArrayLengthTF.getText());
 			array_to_sort = new Integer[length];
-			
+			testSortTime.setArrayname("Generated");
 			chosenArrayTextArea.setText("");
 			sortedArrayTextArea.setText("");
 			Random rand = new Random();
@@ -205,14 +195,24 @@ public class SortView extends JFrame {
 	Runnable runnableSort = new Runnable() {
 		@Override
 		public void run() {
+			
+				/* clear the textarea */
 				sortedArrayTextArea.setText("");
-//				res_array = new Integer[new Integer(randomArrayLengthTF.getText())];
 				
-				Long start = System.currentTimeMillis();
+				/* count the time and sort */
+				Long start = System.nanoTime();
 				array_ressource = ((Sort) sortBox.getSelectedItem()).sort(array_to_sort);
-				start = System.currentTimeMillis() - start;
+				start = System.nanoTime() - start;
 				time.setText(start.toString());
-				System.out.println(start);
+				
+				/* fill the tests */
+				testSortTime.setTime(start);
+				testSortTime.setSort(sortBox.getSelectedItem().toString());
+				testSortTime.setArray_length(array_ressource.length);
+				testSortTime.setDate(new Date().toString());
+				FileTestSave.addStringToFile(TEST_RESSOURCE_PATH, testSortTime.toString());
+				
+				/* fill the textarea */
 				for (int i = 0; i < array_ressource.length; i++) {
 					sortedArrayTextArea.setText(sortedArrayTextArea.getText() + array_ressource[i] + "\n");
 				}
