@@ -35,7 +35,7 @@ public class GraphCanvas extends Canvas {
 	}
 
 	Graph<Vertex2d, Edge<Vertex2d>> graph;
-	GraphSearch search = new BreadthFirstSearch();
+	ISearch search = new BreadthFirstSearch();
 	private int rad;
 
 	/**
@@ -80,6 +80,7 @@ public class GraphCanvas extends Canvas {
 		graph.addEdge(new Edge<Vertex2d>(vertices[1], vertices[2]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[3], vertices[4]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[2], vertices[4]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[2], vertices[1]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[5]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[6]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[5], vertices[6]));
@@ -91,25 +92,32 @@ public class GraphCanvas extends Canvas {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				for (Iterator<Vertex2d> iterator3 = graph.getVertices()
-						.iterator(); iterator3.hasNext();) {
-					Vertex2d ca = (Vertex2d) iterator3.next();
-					ca.setColor(Color.GREEN);
-				}
-
-				for (Iterator<Vertex2d> iterator = graph.getVertices()
-						.iterator(); iterator.hasNext();) {
+//				for (Iterator<Vertex2d> iterator3 = graph.getVertices()
+//						.iterator(); iterator3.hasNext();) {
+//					Vertex2d ca = (Vertex2d) iterator3.next();
+//					ca.setColor(Color.GREEN);
+//				}
+//
+//				for (Iterator<Vertex2d> iterator = graph.getVertices()
+//						.iterator(); iterator.hasNext();) {
+//					Vertex2d vert = (Vertex2d) iterator.next();
+//					if (vert.checkCollision(e.getX(), e.getY())) {
+//						vert.setColor(Color.red);
+//						for (Iterator<Vertex2d> iterator2 = graph
+//								.getNeighbours(vert).iterator(); iterator2
+//								.hasNext();) {
+//							Vertex2d cc = (Vertex2d) iterator2.next();
+//							cc.setColor(Color.RED);
+//						}
+//					}
+//					
+//				}
+				for (Iterator<Vertex2d> iterator = graph.getVertices().iterator(); iterator
+						.hasNext();) {
 					Vertex2d vert = (Vertex2d) iterator.next();
-					if (vert.checkCollision(e.getX(), e.getY())) {
-						vert.setColor(Color.red);
-						for (Iterator<Vertex2d> iterator2 = graph
-								.getNeighbours(vert).iterator(); iterator2
-								.hasNext();) {
-							Vertex2d cc = (Vertex2d) iterator2.next();
-							cc.setColor(Color.RED);
-						}
+					if(vert.checkCollision(e.getX(), e.getY()) != null ) {
+						search.search(graph, vert);
 					}
-					// search.search(graph, first);
 				}
 				repaint();
 			}

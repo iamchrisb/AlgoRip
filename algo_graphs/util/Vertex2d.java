@@ -12,6 +12,14 @@ public class Vertex2d extends Vertex {
 	private Color color;
 	private VertexSearchContent content;
 
+	public VertexSearchContent getContent() {
+		return content;
+	}
+
+	public void setContent(VertexSearchContent content) {
+		this.content = content;
+	}
+
 	public Vertex2d(int id, int x, int y, int radius) {
 		super(id);
 		position = new Vector<Integer>();
@@ -19,6 +27,7 @@ public class Vertex2d extends Vertex {
 		position.add(1, y);
 		this.radius = radius;
 		color = Color.green;
+		content = new VertexSearchContent();
 	}
 
 	public int getX() {
@@ -53,7 +62,7 @@ public class Vertex2d extends Vertex {
 		this.radius = radius;
 	}
 
-	public boolean checkCollision(int clickX, int clickY) {
+	public Vertex2d checkCollision(int clickX, int clickY) {
 //		System.out.println("x: " + clickX + " y: " + clickY);
 //		System.out.println("x vert: " + position.get(0) + " x rad: " + (position.get(0) + radius) + " y vert: " + position.get(1) + " rad y: " + (position.get(1) + radius));
 		if (clickX >= position.get(0) - radius / 2 && clickX <= position.get(0) + radius / 2) {
@@ -62,10 +71,10 @@ public class Vertex2d extends Vertex {
 				System.out.println("x vert: " + position.get(0) + " x rad: " + (position.get(0) + radius) + " y vert: " + position.get(1) + " rad y: " + (position.get(1) + radius));
 //				System.out.println("hit");
 				clicked = true;
-				return true;
+				return this;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public Color getColor() {

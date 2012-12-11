@@ -19,7 +19,7 @@ public class Graph<V extends Vertex, E extends Edge<V>> {
 	// und die inzidenten Kanten in adjList abgelegt ist
 	private ArrayList<V> vertices; // Liste mit allen Knoten
 	private ArrayList<LinkedList<E>> adjList;
-	private GraphSearch search = new BreadthFirstSearch();
+	private ISearch search = new BreadthFirstSearch();
 
 	// Liste mit allen Nachbarlisten zu allen Knoten
 
