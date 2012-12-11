@@ -8,10 +8,10 @@ algo_graphs/.settings/*
 algo_graphs/bin/*
 algo_graphs/.classpath
 algo_graphs/.project
-algo_hashmaps/.settings/*
-algo_hashmaps/bin/*
-algo_hashmaps/.classpath
-algo_hashmaps/.project
+algo_hashmap/.settings/*
+algo_hashmap/bin/*
+algo_hashmap/.classpath
+algo_hashmap/.project
 abgaben
 sort_ripphausen/.settings/*
 sort_ripphausen/bin/*
