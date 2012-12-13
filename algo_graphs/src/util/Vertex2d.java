@@ -26,8 +26,8 @@ public class Vertex2d extends Vertex {
 		position.add(0, x);
 		position.add(1, y);
 		this.radius = radius;
-		color = Color.green;
 		content = new VertexSearchContent();
+		content.setColor(Color.green);
 	}
 
 	public int getX() {
@@ -63,13 +63,8 @@ public class Vertex2d extends Vertex {
 	}
 
 	public Vertex2d checkCollision(int clickX, int clickY) {
-//		System.out.println("x: " + clickX + " y: " + clickY);
-//		System.out.println("x vert: " + position.get(0) + " x rad: " + (position.get(0) + radius) + " y vert: " + position.get(1) + " rad y: " + (position.get(1) + radius));
 		if (clickX >= position.get(0) - radius / 2 && clickX <= position.get(0) + radius / 2) {
 			if (clickY >= position.get(1) - radius / 2 && clickY <= position.get(1) + radius / 2) {
-				System.out.println("x: " + clickX + " y: " + clickY);
-				System.out.println("x vert: " + position.get(0) + " x rad: " + (position.get(0) + radius) + " y vert: " + position.get(1) + " rad y: " + (position.get(1) + radius));
-//				System.out.println("hit");
 				clicked = true;
 				return this;
 			}
@@ -86,7 +81,7 @@ public class Vertex2d extends Vertex {
 	}
 
 	public void draw(Graphics graphic) {
-		graphic.setColor(color);
+		graphic.setColor(content.getColor());
 		graphic.fillOval(this.getX() - this.getRadius() / 2,
 				this.getY() - this.getRadius() / 2, this.getRadius(),
 				this.getRadius());

@@ -5,7 +5,7 @@ package util;
  * @author ripphausen
  * @version 1.0
  */
-public class Vertex {
+public abstract class Vertex {
 	private int id;
 
 	public Vertex(int id) {

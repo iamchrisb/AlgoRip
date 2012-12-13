@@ -8,6 +8,12 @@ public class VertexSearchContent {
 	private Vertex2d pred;
 	private Color color;
 	
+	public VertexSearchContent() {
+		distance = 0;
+		pred = null;
+		color = Color.green;
+	}
+
 	public Color getColor() {
 		return color;
 	}

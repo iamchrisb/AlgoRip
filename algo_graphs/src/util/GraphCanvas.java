@@ -5,9 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
@@ -51,6 +49,7 @@ public class GraphCanvas extends Canvas {
 		setBackground(Color.white);
 		rad = 20;
 		//
+		search.setCanvas(this);
 		graph = new Graph<Vertex2d, Edge<Vertex2d>>();
 		// Vertex2d[] vertices = new Vertex2d[10];
 		// for (int i = 0; i < vertices.length; i++) {
@@ -75,15 +74,23 @@ public class GraphCanvas extends Canvas {
 		}
 
 		graph.addEdge(new Edge<Vertex2d>(vertices[0], vertices[1]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[1], vertices[0]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[1], vertices[3]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[3], vertices[1]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[0], vertices[3]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[3], vertices[0]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[1], vertices[2]));
-		graph.addEdge(new Edge<Vertex2d>(vertices[3], vertices[4]));
-		graph.addEdge(new Edge<Vertex2d>(vertices[2], vertices[4]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[2], vertices[1]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[3], vertices[4]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[3]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[2], vertices[4]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[2]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[5]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[5], vertices[4]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[4], vertices[6]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[6], vertices[4]));
 		graph.addEdge(new Edge<Vertex2d>(vertices[5], vertices[6]));
+		graph.addEdge(new Edge<Vertex2d>(vertices[6], vertices[5]));
 
 		// for (int i = 1; i < vertices.length-1; i++) {
 		// graph.addEdge(new Edge<Vertex2d>(vertices[i-1], vertices[i]));
@@ -112,6 +119,7 @@ public class GraphCanvas extends Canvas {
 //					}
 //					
 //				}
+				Graph<Vertex2d,Edge<Vertex2d>> g = graph;
 				for (Iterator<Vertex2d> iterator = graph.getVertices().iterator(); iterator
 						.hasNext();) {
 					Vertex2d vert = (Vertex2d) iterator.next();
@@ -128,12 +136,6 @@ public class GraphCanvas extends Canvas {
 	public void paint(Graphics graphic) {
 		super.paint(graphic);
 
-		for (Iterator<Vertex2d> iterator = graph.getVertices().iterator(); iterator
-				.hasNext();) {
-			Vertex2d vert = (Vertex2d) iterator.next();
-			vert.draw(graphic);
-		}
-
 		for (Iterator<Edge<Vertex2d>> iterator = graph.getEdges().iterator(); iterator
 				.hasNext();) {
 			Edge<Vertex2d> edge = (Edge<Vertex2d>) iterator.next();
@@ -141,6 +143,12 @@ public class GraphCanvas extends Canvas {
 			graphic.drawLine(edge.getVertexA().getX(),
 					edge.getVertexA().getY(), edge.getVertexB().getX(), edge
 							.getVertexB().getY());
+		}
+		
+		for (Iterator<Vertex2d> iterator = graph.getVertices().iterator(); iterator
+				.hasNext();) {
+			Vertex2d vert = (Vertex2d) iterator.next();
+			vert.draw(graphic);
 		}
 	}
 

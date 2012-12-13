@@ -169,7 +169,7 @@ public class GraphLesen {
 
 		// Knoten hinzufuegen
 		for (int i = 0; i < n; i++) {
-			G.addVertex(new Vertex(i));
+//			G.addVertex(new Vertex(i));
 		}
 
 		/* Kanten hinzufuegen */
@@ -209,7 +209,7 @@ public class GraphLesen {
 
 		// Knoten hinzufuegen
 		for (int i = 0; i < n; i++) {
-			G.addVertex(new Vertex(i));
+//			G.addVertex(new Vertex(i));
 		}
 
 		/* Kanten hinzufuegen */
