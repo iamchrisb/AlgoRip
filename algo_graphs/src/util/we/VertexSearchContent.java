@@ -1,6 +1,7 @@
-package util;
+package util.we;
 
 import java.awt.Color;
+
 
 public class VertexSearchContent {
 

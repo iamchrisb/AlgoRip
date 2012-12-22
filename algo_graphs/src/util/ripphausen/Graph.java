@@ -1,4 +1,4 @@
-package util;
+package util.ripphausen;
 
 import java.util.*;
 
@@ -19,7 +19,7 @@ public class Graph<V extends Vertex, E extends Edge<V>> {
 	// und die inzidenten Kanten in adjList abgelegt ist
 	private ArrayList<V> vertices; // Liste mit allen Knoten
 	private ArrayList<LinkedList<E>> adjList;
-	private ISearch search = new BreadthFirstSearch();
+//	private List adjList = Collections.synchronizedList(new ArrayList<LinkedList<E>>());
 
 	// Liste mit allen Nachbarlisten zu allen Knoten
 
@@ -363,6 +363,14 @@ public class Graph<V extends Vertex, E extends Edge<V>> {
 			i++;
 		}
 		return new String(s);
+	}
+	
+	public String toStringWithoutNeighbors() {
+		StringBuilder sb = new StringBuilder();
+		for (V v : vertices) {
+			sb.append(v.toString() + "\n");
+		}
+		return sb.toString();
 	}
 	
 }

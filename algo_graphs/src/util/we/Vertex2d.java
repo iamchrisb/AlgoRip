@@ -1,15 +1,15 @@
-package util;
+package util.we;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Vector;
 
+import util.ripphausen.Vertex;
+
 public class Vertex2d extends Vertex {
 
 	private Vector<Integer> position;
-	private boolean clicked;
 	private int radius;
-	private Color color;
 	private VertexSearchContent content;
 
 	public VertexSearchContent getContent() {
@@ -46,14 +46,6 @@ public class Vertex2d extends Vertex {
 		position.set(1, y);
 	}
 
-	public boolean isClicked() {
-		return clicked;
-	}
-
-	public void setClicked(boolean clicked) {
-		this.clicked = clicked;
-	}
-
 	public int getRadius() {
 		return radius;
 	}
@@ -63,21 +55,14 @@ public class Vertex2d extends Vertex {
 	}
 
 	public Vertex2d checkCollision(int clickX, int clickY) {
-		if (clickX >= position.get(0) - radius / 2 && clickX <= position.get(0) + radius / 2) {
-			if (clickY >= position.get(1) - radius / 2 && clickY <= position.get(1) + radius / 2) {
-				clicked = true;
+		if (clickX >= position.get(0) - radius / 2
+				&& clickX <= position.get(0) + radius / 2) {
+			if (clickY >= position.get(1) - radius / 2
+					&& clickY <= position.get(1) + radius / 2) {
 				return this;
 			}
 		}
 		return null;
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color c) {
-		this.color = c;
 	}
 
 	public void draw(Graphics graphic) {
@@ -85,6 +70,25 @@ public class Vertex2d extends Vertex {
 		graphic.fillOval(this.getX() - this.getRadius() / 2,
 				this.getY() - this.getRadius() / 2, this.getRadius(),
 				this.getRadius());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((position == null) ? 0 : position.hashCode());
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		if (content.getPred() != null)
+			return "Vertex2d: " + getId() + " - [position = " + position
+					+ ", distance = " + content.getDistance() + " pred= "
+					+ content.getPred().getId() + "]";
+		return "Vertex2d: " + getId() + " - [position = " + position
+				+ ", distance = " + content.getDistance() + "]";
 	}
 
 }

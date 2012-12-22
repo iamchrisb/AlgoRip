@@ -186,7 +186,7 @@ public class HashMap<K, V> implements Map<K, V> {
 				if (type.getKey().equals(key)) {
 					value = type.getValue();
 					iterator.remove();
-					// we can break now, cause there is no similar key
+					// we can break now, cause there is no further similar key
 					break;
 				}
 			}

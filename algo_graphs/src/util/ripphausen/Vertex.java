@@ -1,4 +1,4 @@
-package util;
+package util.ripphausen;
 
 /** Eine Klasse, die Knoten eines Graphen repräsentiert
  * 

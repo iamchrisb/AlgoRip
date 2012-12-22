@@ -1,4 +1,6 @@
-package util;
+package util.ripphausen;
+
+import java.awt.Color;
 
 /** Eine Klasse die Kanten eines Graphen repräsentiert
  * 
@@ -10,7 +12,16 @@ public class Edge <V extends Vertex> {
 	private V vertexA;
 	private V vertexB;
 	private int weight = 1;
+	private Color color;
 	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public Edge(V vertexA, V vertexB, int weight) {
 		super();
 		this.vertexA = vertexA;
