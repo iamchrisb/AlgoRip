@@ -1,6 +1,10 @@
 package util.ripphausen;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Eine Klasse, die die Datenstruktur eines Graphen repräsentiert. Intern werden

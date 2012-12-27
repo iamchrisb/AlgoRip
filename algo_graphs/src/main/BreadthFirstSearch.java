@@ -14,8 +14,8 @@ import util.ripphausen.Graph;
 import util.ripphausen.Vertex;
 import util.we.Vertex2d;
 
-public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
-		ISearch<V, E> {
+public class BreadthFirstSearch<V extends Vertex2d, E extends Edge<V>>
+		implements ISearch<V, E> {
 
 	private GraphCanvas canvas;
 
@@ -41,8 +41,8 @@ public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
 
 			while (queue.size() != 0) {
 				Vertex2d u = queue.poll();
-				for (Iterator<V> iterator = g.getNeighbours(u.getId()).iterator(); iterator
-						.hasNext();) {
+				for (Iterator<V> iterator = g.getNeighbours(u.getId())
+						.iterator(); iterator.hasNext();) {
 					Vertex2d vertex2d = (Vertex2d) iterator.next();
 					if (vertex2d.getContent().getColor().equals(Color.green)) {
 						vertex2d.getContent().setColor(Color.gray);
@@ -55,7 +55,8 @@ public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
 				u.getContent().setColor(Color.black);
 			}
 		} else {
-			System.out.println("could only be used with Vertex2d <- ...");
+			System.out
+					.println("could only be used with Vertex2d and Subclasses who have an instance of VertexSearchContext");
 		}
 	}
 
@@ -64,8 +65,7 @@ public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
 		this.canvas = canvas;
 	}
 
-	public void searchShortestWayOfTwo(
-			Graph<V, E> g, V start, V second) {
+	public void searchShortestWayOfTwo(Graph<V, E> g, V start, V second) {
 
 		search(g, start);
 		ArrayList<E> wayList = new ArrayList<E>();
@@ -74,11 +74,6 @@ public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
 		while (predCur.getContent().getPred() != null) {
 			for (E edge : Collections.synchronizedCollection(g
 					.getIncidentEdges(predCur.getId()))) {
-				// System.out.println("p-id: " +
-				// predCur.getContent().getPred().getId() + " vb-id: " +
-				// edge.getVertexB().getId() + " cond: " +
-				// (predCur.getContent().getPred().getId() ==
-				// edge.getVertexB().getId()));
 				if (predCur.getContent().getPred().getId() == (edge
 						.getVertexB().getId())) {
 					edge.setColor(Color.red);
@@ -90,27 +85,28 @@ public class BreadthFirstSearch<V extends Vertex, E extends Edge<V>> implements
 		}
 
 		StringBuilder sb = new StringBuilder("");
-		for (int i = wayList.size() - 1; i >= 0; i--) {
-			sb.append(wayList.get(i).toString());
-			if (i != 0) {
-				sb.append("->");
-			}
-		}
 
 		if (wayList.size() == 0) {
-			System.out.println("There is no shortest Way between: " + start
-					+ " and " + second);
+			sb.append("There is no shortest Way between: " + start.getId()
+					+ " and " + second.getId());
 		} else {
-			System.out.println(sb);
+
+			for (int i = wayList.size() - 1; i >= 0; i--) {
+				sb.append(wayList.get(i).toString());
+				if (i != 0) {
+					sb.append("->");
+				}
+			}
 		}
+		
+		System.out.println(sb);
+		canvas.setTxtOutput(canvas.getTxtOutput() + sb + "\n");
 
 	}
 
 	@Override
-	public void searchShortestWayToAll(
-			Graph<V, E> g, V start) {
-		for (V vertex : Collections.synchronizedCollection(g
-				.getVertices())) {
+	public void searchShortestWayToAll(Graph<V, E> g, V start) {
+		for (V vertex : Collections.synchronizedCollection(g.getVertices())) {
 			if (vertex.getId() != start.getId()) {
 				searchShortestWayOfTwo(g, start, vertex);
 			}

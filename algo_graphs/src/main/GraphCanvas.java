@@ -1,7 +1,9 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import util.ripphausen.Edge;
 import util.ripphausen.Graph;
@@ -28,24 +31,30 @@ public class GraphCanvas extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private Vertex2d[] vertices;
 	private JPanel mainPanel;
-	private JPanel choicePanel;
+	private JPanel choicePanelContainer;
 	private JComboBox chooseAmount;
 	private JButton refreshB;
 	private String[] amounts = { "2 Points", "All Points" };
 
 	private Vertex2d first;
 	private Vertex2d second;
+	private JTextArea txtOutput;
+	private JPanel choicePanel;
 
 	public GraphCanvas(JFrame frame) {
-		choicePanel = new JPanel();
+		choicePanelContainer = new JPanel();
+		choicePanelContainer.setLayout(new BorderLayout());
+		
 		chooseAmount = new JComboBox(amounts);
+		choicePanel = new JPanel();
 		choicePanel.add(chooseAmount);
+		
 
 		mainPanel = new JPanel();
 
 		mainPanel.setLayout(new GridLayout(0, 2));
 		mainPanel.add(this);
-		mainPanel.add(choicePanel);
+		mainPanel.add(choicePanelContainer);
 
 		frame.setVisible(true);
 		frame.setSize(800, 300);
@@ -53,12 +62,12 @@ public class GraphCanvas extends Canvas {
 
 		setBackground(Color.white);
 
-		rad = 20;
 		refreshB = new JButton("Refresh");
 		refreshB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				txtOutput.setText("");
 				for (Iterator<Vertex2d> iterator = graph.getVertices()
 						.iterator(); iterator.hasNext();) {
 					Vertex2d vertex = (Vertex2d) iterator.next();
@@ -76,7 +85,18 @@ public class GraphCanvas extends Canvas {
 			}
 		});
 		choicePanel.add(refreshB);
+		txtOutput = new JTextArea();
+		txtOutput.setRows(1);
+		txtOutput.setColumns(1);
+		txtOutput.setBackground(Color.gray);
+		txtOutput.setCursor(Cursor.getDefaultCursor());
+//		txtOutput.setEditable(false);
+		txtOutput.setForeground(Color.white);
+		choicePanelContainer.add(choicePanel , BorderLayout.NORTH);
+		choicePanelContainer.add(txtOutput , BorderLayout.CENTER);
+		
 		//
+		rad = 20;
 		search.setCanvas(this);
 		graph = new Graph<Vertex2d, Edge<Vertex2d>>();
 
@@ -185,4 +205,13 @@ public class GraphCanvas extends Canvas {
 							- vertex.getRadius() / 2);
 		}
 	}
+	
+	public String getTxtOutput() {
+		return txtOutput.getText();
+	}
+
+	public void setTxtOutput(String txtOutput) {
+		this.txtOutput.setText(txtOutput);
+	}
 }
+

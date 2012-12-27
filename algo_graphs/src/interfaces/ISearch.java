@@ -3,9 +3,9 @@ package interfaces;
 import main.GraphCanvas;
 import util.ripphausen.Edge;
 import util.ripphausen.Graph;
-import util.ripphausen.Vertex;
+import util.we.Vertex2d;
 
-public interface ISearch<V extends Vertex, E extends Edge<V>> {
+public interface ISearch<V extends Vertex2d, E extends Edge<V>> {
 
 	void search(Graph<V, E> g, V first);
 
