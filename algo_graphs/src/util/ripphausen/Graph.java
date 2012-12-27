@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import util.we.annotations.NoGSON;
+
 /**
  * Eine Klasse, die die Datenstruktur eines Graphen repräsentiert. Intern werden
  * hier Graphen durch Adjazenzlisten dargestellt
@@ -18,6 +20,8 @@ import java.util.ListIterator;
  *            eine Unterklasse der Klasse Edge<V> fuer die Kanten eines Graphen
  */
 public class Graph<V extends Vertex, E extends Edge<V>> {
+	
+	@NoGSON
 	private HashMap<Integer, Integer> vertexIndex;
 	// gibt zu einer Knoten-Id den Index an, an dem der Knoten in vertices
 	// und die inzidenten Kanten in adjList abgelegt ist

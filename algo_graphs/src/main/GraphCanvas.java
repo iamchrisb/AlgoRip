@@ -90,8 +90,10 @@ public class GraphCanvas extends Canvas {
 		txtOutput.setColumns(1);
 		txtOutput.setBackground(Color.gray);
 		txtOutput.setCursor(Cursor.getDefaultCursor());
-//		txtOutput.setEditable(false);
 		txtOutput.setForeground(Color.white);
+		
+		//setting editable to false, crashes the gui
+		
 		choicePanelContainer.add(choicePanel , BorderLayout.NORTH);
 		choicePanelContainer.add(txtOutput , BorderLayout.CENTER);
 		

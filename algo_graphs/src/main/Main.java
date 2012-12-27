@@ -2,10 +2,15 @@ package main;
 
 import javax.swing.JFrame;
 
+import util.we.GraphJSON;
+
 public class Main {
+	
+	public static String TEST_RESSOURCE_PATH = new String(
+			System.getProperty("user.dir") + "/res/graph.json");
 
 	public static void main(String[] args) {
-		new GraphCanvas(new JFrame("GRAPHEN"));
+//		new GraphCanvas(new JFrame("GRAPHEN"));
 		// Graph<Vertex, Edge<Vertex>> g = new Graph<Vertex, Edge<Vertex>>();
 		// Vertex v = new Vertex(10);
 		// System.out.println(v);
@@ -22,6 +27,6 @@ public class Main {
 		// System.out.println(g3);
 		// } catch (Exception e) {
 		// }
-
+		GraphJSON.getFromJSON(TEST_RESSOURCE_PATH);
 	}
 }

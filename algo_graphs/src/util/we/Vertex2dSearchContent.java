@@ -2,14 +2,13 @@ package util.we;
 
 import java.awt.Color;
 
-
-public class VertexSearchContent {
+public class Vertex2dSearchContent {
 
 	private int distance;
 	private Vertex2d pred;
 	private Color color;
 	
-	public VertexSearchContent() {
+	public Vertex2dSearchContent() {
 		distance = 0;
 		pred = null;
 		color = Color.green;
