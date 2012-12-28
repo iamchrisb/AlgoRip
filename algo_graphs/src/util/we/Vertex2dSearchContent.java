@@ -2,16 +2,24 @@ package util.we;
 
 import java.awt.Color;
 
-public class Vertex2dSearchContent {
+import util.ripphausen.Vertex;
+
+public class Vertex2dSearchContent<V extends Vertex> {
 
 	private int distance;
-	private Vertex2d pred;
+	private V pred;
 	private Color color;
 	
 	public Vertex2dSearchContent() {
 		distance = 0;
 		pred = null;
 		color = Color.green;
+	}
+	
+	public Vertex2dSearchContent(Color color, int distance, V pred){
+		this.color = color;
+		this.distance = distance;
+		this.pred = pred;
 	}
 
 	public Color getColor() {
@@ -30,11 +38,11 @@ public class Vertex2dSearchContent {
 		this.distance = distance;
 	}
 
-	public Vertex2d getPred() {
+	public V getPred() {
 		return pred;
 	}
 
-	public void setPred(Vertex2d pred) {
+	public void setPred(V pred) {
 		this.pred = pred;
 	}
 

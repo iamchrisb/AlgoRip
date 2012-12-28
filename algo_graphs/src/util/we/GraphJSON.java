@@ -1,10 +1,14 @@
 package util.we;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Collection;
+
+import util.ripphausen.Edge;
+import util.ripphausen.Graph;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +26,7 @@ public class GraphJSON {
 	 * 
 	 */
 
-	public static void getFromJSON(String path) {
+	public static <V extends Vertex2d, E extends Edge<V>> GraphJsonPojo<V, E> getFromJSON(String path) {
 		System.out.println("getFromJSON");
 		String jsonString = "";
 		try {
@@ -36,26 +40,17 @@ public class GraphJSON {
 			e.printStackTrace();
 		}
 		System.out.println(jsonString);
-		Gson gson = new GsonBuilder()
-				.setExclusionStrategies(
-						new GraphGSONExclusionStrategy(
-								Vertex2dSearchContent.class)).serializeNulls()
-				.create();
+		Gson gson = new Gson();
 
-//		Vertex2d vert = gson.fromJson(jsonString, Vertex2d.class);
-//		System.out.println(vert);
-		
-		/**
-		 * Type collectionType = new TypeToken<Collection<Integer>>(){}.getType();
-			Collection<Integer> ints2 = gson.fromJson(json, collectionType);
-		 */
-		
-		Type collType = new TypeToken<Collection<Vertex2d>>(){}.getType();
-		Collection<Vertex2d> vertices = gson.fromJson(jsonString, collType);
-		
-		for (Vertex2d vert : vertices) {
-			System.out.println(vert);
+		Type foo = new TypeToken<GraphJsonPojo<Vertex2d, Edge<Vertex2d>>>() {
+		}.getType();
+		GraphJsonPojo<V, E> g = gson.fromJson(jsonString, foo);
+		for (V vert : g.getVertices()) {
+			vert.setContent(new Vertex2dSearchContent());
+			vert.getContent().setColor(Color.green);
 		}
+		return g;
+
 	}
 
 }

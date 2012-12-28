@@ -5,7 +5,7 @@ package util.ripphausen;
  * @author ripphausen
  * @version 1.0
  */
-public abstract class Vertex {
+public class Vertex {
 	private int id;
 
 	public Vertex(int id) {

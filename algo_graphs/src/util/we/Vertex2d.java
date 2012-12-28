@@ -1,23 +1,27 @@
 package util.we;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import util.ripphausen.Vertex;
 
+import com.google.gson.annotations.Expose;
+
 public class Vertex2d extends Vertex {
 
+	@Expose
 	private int x;
+	@Expose
 	private int y;
+	@Expose
 	private int radius;
 
-	private Vertex2dSearchContent content;
+	private Vertex2dSearchContent<Vertex2d> content;
 
-	public Vertex2dSearchContent getContent() {
+	public Vertex2dSearchContent<Vertex2d> getContent() {
 		return content;
 	}
 
-	public void setContent(Vertex2dSearchContent content) {
+	public void setContent(Vertex2dSearchContent<Vertex2d> content) {
 		this.content = content;
 	}
 
@@ -26,8 +30,11 @@ public class Vertex2d extends Vertex {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
-		content = new Vertex2dSearchContent();
-		content.setColor(Color.green);
+		content = new Vertex2dSearchContent<Vertex2d>();
+	}
+	
+	public Vertex2d(int id) {
+		super(id);
 	}
 
 	public int getRadius() {
@@ -65,7 +72,7 @@ public class Vertex2d extends Vertex {
 			}
 		}
 		return "Vertex2d: " + getId() + " - [position = " + " x: " + getX()
-				+ " y:" + getY() + " radius: " + radius + "]";
+				+ " y:" + getY() + " radius: " + radius + "] ";
 	}
 
 	public int getX() {

@@ -1,5 +1,4 @@
 package util.ripphausen;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -170,7 +169,7 @@ public class GraphLesen {
 
 		// Knoten hinzufuegen
 		for (int i = 0; i < n; i++) {
-//			G.addVertex(new Vertex(i));
+			G.addVertex(new Vertex(i));
 		}
 
 		/* Kanten hinzufuegen */
@@ -210,7 +209,7 @@ public class GraphLesen {
 
 		// Knoten hinzufuegen
 		for (int i = 0; i < n; i++) {
-//			G.addVertex(new Vertex(i));
+			G.addVertex(new Vertex(i));
 		}
 
 		/* Kanten hinzufuegen */
@@ -220,9 +219,9 @@ public class GraphLesen {
 			int w = GArray[i][2];
 			Vertex a = G.getVertex(idxa);
 			Vertex b = G.getVertex(idxb);
-//			G.addEdge(new Edge<Vertex>(a,b,w));
+			G.addEdge(new Edge<Vertex>(a,b,w));
 			if (!directed) {
-//				G.addEdge(new Edge<Vertex>(b,a,w));
+				G.addEdge(new Edge<Vertex>(b,a,w));
 			}
 		}
 		return G;
