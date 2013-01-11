@@ -4,17 +4,14 @@ import interfaces.ISearch;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import main.GraphCanvas;
-
 import util.ripphausen.Edge;
 import util.ripphausen.Graph;
-import util.ripphausen.Vertex;
 
 public class BreadthFirstSearch2d<V extends Vertex2d, E extends Edge<V>> implements ISearch<V, E> {
 

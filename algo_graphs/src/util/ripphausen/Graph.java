@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import util.we.Vertex2d;
+
 /**
  * Eine Klasse, die die Datenstruktur eines Graphen repräsentiert. Intern werden
  * hier Graphen durch Adjazenzlisten dargestellt
@@ -377,5 +379,4 @@ public class Graph<V extends Vertex, E extends Edge<V>> {
 		}
 		return sb.toString();
 	}
-	
 }

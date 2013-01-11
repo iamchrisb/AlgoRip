@@ -103,53 +103,53 @@ public class GraphCanvas extends Canvas {
 		choicePanelContainer.add(txtOutput, BorderLayout.CENTER);
 
 		//
-		rad = 20;
+//		rad = 20;
 		search.setCanvas(this);
 
-		vertices = new ArrayList<Vertex2d>();
-		vertices.add(new Vertex2d((int) (53), 40, 40, rad));
-		vertices.add(new Vertex2d((int) (12), 40, 140, rad));
-		vertices.add(new Vertex2d((int) (93), 140, 40, rad));
-		vertices.add(new Vertex2d((int) (80), 140, 140, rad));
-		vertices.add(new Vertex2d((int) (5), 180, 90, rad));
-		vertices.add(new Vertex2d((int) (66), 260, 40, rad));
-		vertices.add(new Vertex2d((int) (7), 260, 140, rad));
-		vertices.add(new Vertex2d((int) (21), 260, 180, rad));
-		vertices.add(new Vertex2d((int) (75), 220, 220, rad));
+//		vertices = new ArrayList<Vertex2d>();
+//		vertices.add(new Vertex2d((int) (53), 40, 40, rad));
+//		vertices.add(new Vertex2d((int) (12), 40, 140, rad));
+//		vertices.add(new Vertex2d((int) (93), 140, 40, rad));
+//		vertices.add(new Vertex2d((int) (80), 140, 140, rad));
+//		vertices.add(new Vertex2d((int) (5), 180, 90, rad));
+//		vertices.add(new Vertex2d((int) (66), 260, 40, rad));
+//		vertices.add(new Vertex2d((int) (7), 260, 140, rad));
+//		vertices.add(new Vertex2d((int) (21), 260, 180, rad));
+//		vertices.add(new Vertex2d((int) (75), 220, 220, rad));
 		//
 		// for (int i = 0; i < vertices.length; i++) {
 		// graph.addVertex(vertices[i]);
 		// }
 
-		Collection<Edge<Vertex2d>> edges = new ArrayList<Edge<Vertex2d>>();
-		edges.add(new Edge<Vertex2d>(vertices.get(0), vertices.get(1)));
-		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(0)));
-		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(3)));
-		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(1)));
-		edges.add(new Edge<Vertex2d>(vertices.get(0), vertices.get(3)));
-		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(0)));
-		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(2)));
-		edges.add(new Edge<Vertex2d>(vertices.get(2), vertices.get(1)));
-		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(4)));
-		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(3)));
-		edges.add(new Edge<Vertex2d>(vertices.get(2), vertices.get(4)));
-		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(2)));
-		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(5)));
-		edges.add(new Edge<Vertex2d>(vertices.get(5), vertices.get(4)));
-		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(6)));
-		edges.add(new Edge<Vertex2d>(vertices.get(6), vertices.get(4)));
-		edges.add(new Edge<Vertex2d>(vertices.get(5), vertices.get(6)));
-		edges.add(new Edge<Vertex2d>(vertices.get(6), vertices.get(5)));
-		edges.add(new Edge<Vertex2d>(vertices.get(7), vertices.get(8)));
-		edges.add(new Edge<Vertex2d>(vertices.get(8), vertices.get(7)));
+//		Collection<Edge<Vertex2d>> edges = new ArrayList<Edge<Vertex2d>>();
+//		edges.add(new Edge<Vertex2d>(vertices.get(0), vertices.get(1)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(0)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(3)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(1)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(0), vertices.get(3)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(0)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(1), vertices.get(2)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(2), vertices.get(1)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(3), vertices.get(4)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(3)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(2), vertices.get(4)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(2)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(5)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(5), vertices.get(4)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(4), vertices.get(6)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(6), vertices.get(4)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(5), vertices.get(6)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(6), vertices.get(5)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(7), vertices.get(8)));
+//		edges.add(new Edge<Vertex2d>(vertices.get(8), vertices.get(7)));
 
-		GraphJsonPojo<Vertex2d, Edge<Vertex2d>> gPojo = GraphJSON.getFromJSON(TEST_RESSOURCE_PATH);
+//		GraphJsonPojo<Vertex2d, Edge<Vertex2d>> gPojo = GraphJSON.getFromJSON(TEST_RESSOURCE_PATH);
 		// Graph<Vertex2d, Edge<Vertex2d>> g2 = new Graph<Vertex2d,
 		// Edge<Vertex2d>>(gra.getVertices(), gra.getEdges());
-		Graph<Vertex2d, Edge<Vertex2d>> graph2 = new Graph<Vertex2d, Edge<Vertex2d>>(gPojo.getVertices(), gPojo.getEdges());
-		Graph<Vertex2d, Edge<Vertex2d>> graph3 = new Graph<Vertex2d, Edge<Vertex2d>>(vertices , edges);
-		graph = new Graph<Vertex2d, Edge<Vertex2d>>(vertices , edges );
-		System.out.println();
+//		Graph<Vertex2d, Edge<Vertex2d>> graph2 = new Graph<Vertex2d, Edge<Vertex2d>>(gPojo.getVertices(), gPojo.getEdges());
+//		Graph<Vertex2d, Edge<Vertex2d>> graph3 = new Graph<Vertex2d, Edge<Vertex2d>>(vertices , edges);
+//		graph = new Graph<Vertex2d, Edge<Vertex2d>>(vertices , edges );
+//		System.out.println();
 //		graph = new Graph<Vertex2d, Edge<Vertex2d>>(gPojo.getVertices(), gPojo.getEdges());
 
 		addMouseListener(new MouseAdapter() {
@@ -214,7 +214,7 @@ public class GraphCanvas extends Canvas {
 			graphic.drawLine(edge.getVertexA().getX(), edge.getVertexA().getY(), edge.getVertexB().getX(), edge.getVertexB().getY());
 		}
 
-		for (Vertex2d vertex : Collections.synchronizedCollection(graph.getVertices())) {
+		for (Vertex2d vertex : graph.getVertices()) {
 			vertex.draw(graphic);
 			if (vertex.getContent() == null)
 				vertex.setContent(new Vertex2dSearchContent());

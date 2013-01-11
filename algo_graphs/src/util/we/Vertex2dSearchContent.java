@@ -9,6 +9,9 @@ public class Vertex2dSearchContent<V extends Vertex> {
 	private int distance;
 	private V pred;
 	private Color color;
+	private int x;
+	private int y;
+	private int radius;
 	
 	public Vertex2dSearchContent() {
 		distance = 0;

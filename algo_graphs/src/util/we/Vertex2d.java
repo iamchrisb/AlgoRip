@@ -17,14 +17,6 @@ public class Vertex2d extends Vertex {
 
 	private Vertex2dSearchContent<Vertex2d> content;
 
-	public Vertex2dSearchContent<Vertex2d> getContent() {
-		return content;
-	}
-
-	public void setContent(Vertex2dSearchContent<Vertex2d> content) {
-		this.content = content;
-	}
-
 	public Vertex2d(int id, int x, int y, int radius) {
 		super(id);
 		this.x = x;
